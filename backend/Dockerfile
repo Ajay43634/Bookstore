@@ -14,5 +14,8 @@ ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     PATH="/app/.venv/bin:$PATH"
 
+COPY start.sh ./
+RUN chmod +x start.sh
+
 EXPOSE 4000
-CMD ["uv", "run", "uvicorn", "bookstore.main:app", "--host", "0.0.0.0", "--port", "4000", "--reload"]
+CMD ["./start.sh"]

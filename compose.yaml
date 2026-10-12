@@ -1,0 +1,39 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: bookstore
+      POSTGRES_PASSWORD: bookstore
+      POSTGRES_DB: bookstore
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  backend:
+    image: bookstore-backend
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql+psycopg://bookstore:bookstore@db:5432/bookstore
+      JWT_SECRET: ${JWT_SECRET:-dev-secret-change-me}
+      PORT: 4000
+
+  frontend:
+    image: bookstore-frontend
+    depends_on:
+      - backend
+    environment:
+      NEXT_PUBLIC_API_BASE: http://localhost/api/v1
+      INTERNAL_API_BASE: http://backend:4000/api/v1
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - frontend
+      - backend
+
+volumes:
+  db-data:

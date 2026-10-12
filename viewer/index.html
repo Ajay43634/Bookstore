@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CLAUDE.md — BookStore</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/highlight.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f6f8fa;
+      color: #24292f;
+      line-height: 1.7;
+    }
+
+    header {
+      background: #1f2328;
+      color: #f0f6fc;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 1px 4px rgba(0,0,0,.3);
+    }
+
+    header h1 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: .02em;
+    }
+
+    header span {
+      font-size: .85rem;
+      color: #8b949e;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 2.5rem auto;
+      padding: 0 1.5rem 4rem;
+    }
+
+    #content {
+      background: #ffffff;
+      border: 1px solid #d0d7de;
+      border-radius: 8px;
+      padding: 2.5rem 3rem;
+    }
+
+    /* Markdown typography */
+    #content h1 { font-size: 2rem; border-bottom: 2px solid #d0d7de; padding-bottom: .4rem; margin: 0 0 1.2rem; }
+    #content h2 { font-size: 1.4rem; border-bottom: 1px solid #e8ecf0; padding-bottom: .3rem; margin: 2rem 0 .8rem; color: #1f2328; }
+    #content h3 { font-size: 1.1rem; margin: 1.5rem 0 .5rem; color: #1f2328; }
+    #content p  { margin: .6rem 0 1rem; }
+    #content ul, #content ol { margin: .5rem 0 1rem 1.5rem; }
+    #content li { margin: .25rem 0; }
+    #content a  { color: #0969da; text-decoration: none; }
+    #content a:hover { text-decoration: underline; }
+
+    #content blockquote {
+      border-left: 4px solid #0969da;
+      background: #f0f6ff;
+      margin: 1rem 0;
+      padding: .6rem 1rem;
+      border-radius: 0 6px 6px 0;
+      color: #24292f;
+    }
+
+    #content code {
+      background: #eef1f5;
+      border-radius: 4px;
+      font-family: "SFMono-Regular", Consolas, monospace;
+      font-size: .85em;
+      padding: .15em .4em;
+    }
+
+    #content pre {
+      background: #f6f8fa;
+      border: 1px solid #d0d7de;
+      border-radius: 6px;
+      padding: 1rem 1.2rem;
+      overflow-x: auto;
+      margin: .8rem 0 1.2rem;
+    }
+
+    #content pre code {
+      background: none;
+      padding: 0;
+      font-size: .875rem;
+      line-height: 1.6;
+    }
+
+    #content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0 1.5rem;
+      font-size: .9rem;
+    }
+
+    #content th {
+      background: #f6f8fa;
+      border: 1px solid #d0d7de;
+      padding: .5rem .75rem;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    #content td {
+      border: 1px solid #d0d7de;
+      padding: .5rem .75rem;
+      vertical-align: top;
+    }
+
+    #content tr:nth-child(even) td { background: #f6f8fa; }
+
+    #content hr {
+      border: none;
+      border-top: 1px solid #d0d7de;
+      margin: 2rem 0;
+    }
+
+    #content strong { color: #1f2328; }
+
+    #loading {
+      text-align: center;
+      padding: 4rem;
+      color: #57606a;
+      font-size: 1rem;
+    }
+
+    #error {
+      display: none;
+      background: #fff0f0;
+      border: 1px solid #f1a7a7;
+      border-radius: 8px;
+      padding: 1.5rem 2rem;
+      color: #cf222e;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>CLAUDE.md</h1>
+    <span>BookStore — Operating Instructions</span>
+  </header>
+  <main>
+    <div id="error">Failed to load CLAUDE.md. Make sure the file is being served alongside this page.</div>
+    <div id="content"><div id="loading">Loading...</div></div>
+  </main>
+
+  <script>
+    marked.setOptions({
+      highlight: (code, lang) => {
+        if (lang && hljs.getLanguage(lang)) {
+          return hljs.highlight(code, { language: lang }).value;
+        }
+        return hljs.highlightAuto(code).value;
+      },
+      breaks: false,
+      gfm: true,
+    });
+
+    fetch("CLAUDE.md")
+      .then(r => {
+        if (!r.ok) throw new Error(r.statusText);
+        return r.text();
+      })
+      .then(md => {
+        document.getElementById("content").innerHTML = marked.parse(md);
+      })
+      .catch(() => {
+        document.getElementById("content").style.display = "none";
+        document.getElementById("error").style.display = "block";
+      });
+  </script>
+</body>
+</html>

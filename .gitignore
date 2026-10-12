@@ -1,0 +1,23 @@
+# Dependencies
+frontend/node_modules/
+backend/.venv/
+
+# Next.js build output
+frontend/.next/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Environment
+.env
+
+# Docker volumes / OS
+.DS_Store
+*.swp
+*.swo
+
+# Claude
+.claude/

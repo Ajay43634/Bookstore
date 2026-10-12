@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-base:      #FBF7EF;
+  --bg-elevated:  #F3ECDE;
+  --bg-sunken:    #E8DFCD;
+  --ink:          #2C2A22;
+  --ink-muted:    #6F6553;
+  --ink-faint:    #A89F89;
+  --blue-soft:    #C9DCE4;
+  --blue:         #8FB3C2;
+  --blue-deep:    #5C8A9C;
+  --green-soft:   #D2DEBC;
+  --green:        #A4BD86;
+  --green-deep:   #748B5C;
+  --yellow-soft:  #F0DFA8;
+  --yellow:       #DEC677;
+  --yellow-deep:  #B89E4A;
+}
+
+body {
+  background: var(--bg-base);
+  color: var(--ink);
+}

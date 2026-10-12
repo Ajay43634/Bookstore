@@ -1,0 +1,14 @@
+services:
+  backend:
+    volumes:
+      - ./backend:/app
+      - backend-venv:/app/.venv
+
+  frontend:
+    volumes:
+      - ./frontend:/app
+      - frontend-node-modules:/app/node_modules
+
+volumes:
+  backend-venv:
+  frontend-node-modules:
